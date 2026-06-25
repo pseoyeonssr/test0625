@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Archive Portfolio</title>
+
+  <!-- CSS 연결 -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <aside class="side-nav">
+    <div class="side-item s1">
+      <span>01</span>
+      MAIN
+    </div>
+
+    <div class="side-item s2">
+      <span>02</span>
+      ABOUT
+      <small>+ SKILLS</small>
+    </div>
+
+    <div class="side-item s3">
+      <span>03</span>
+      WORKS
+      <small>ARCHIVE</small>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <section class="hero" id="main">
+    <div class="hero-inner">
+      <div class="logo">
+        PARK SEOYEON<br />
+        VISUAL DESIGNER
+      </div>
+
+      <div class="menu">
+        MENU <span class="menu-line"></span>
+      </div>
+
+      <h1 class="title">ARCHIVE</h1>
+
+      <nav class="year-menu">
+        <a href="#works" onclick="setYear('2025')">2025</a>
+        <a href="#works" class="active" onclick="setYear('2026')">2026 —</a>
+        <a class="locked">2027 🔒</a>
+      </nav>
+
+      <div class="scroll-text">SCROLL</div>
+    </div>
+
+    <div class="collapse-blocks"></div>
+  </section>
+
+  <!-- ABOUT + SKILLS -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="photo-wrap">
+        <div class="photo">
+          <img src="img/profile.jpg" alt="프로필 이미지" />
+        </div>
+      </div>
+
+      <div class="about-text">
+        <h2>PARK<br />SEOYEON</h2>
+        <div class="red">VISUAL DESIGNER</div>
+
+        <p>
+          사람들에게 정보를 효과적으로 전달하는 디자인을 연구하고 있습니다.
+          인포그래픽, 편집디자인, 브랜딩을 중심으로 작업하고 있습니다.
+        </p>
+
+        <div class="line"></div>
+
+        <strong>EDUCATION</strong>
+        <p>
+          2025 - 현재<br />
+          시각디자인과 재학
+        </p>
+      </div>
+
+      <div class="skills">
+        <h3>SKILLS</h3>
+
+        <div class="skill-group">
+          <h4>GRAPHIC</h4>
+          <ul>
+            <li>Photoshop</li>
+            <li>Illustrator</li>
+            <li>InDesign</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4>WEB</h4>
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Figma</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4>INTERESTS</h4>
+          <ul>
+            <li>Editorial Design</li>
+            <li>Infographic</li>
+            <li>Branding</li>
+            <li>Typography</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="works" id="works">
+    <div class="container">
+      <div class="year-tabs">
+        <button onclick="setYear('2025')" id="tab-2025">2025</button>
+        <button onclick="setYear('2026')" id="tab-2026" class="active">2026</button>
+        <button disabled>2027 🔒</button>
+      </div>
+
+      <div class="work-grid" id="workGrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <h2>LET’S WORK<br />TOGETHER</h2>
+
+        <div>
+          <h4>EMAIL</h4>
+          <p>seoyeon.park@gmail.com</p>
+        </div>
+
+        <div>
+          <h4>INSTAGRAM</h4>
+          <p>@seoyeon.design</p>
+        </div>
+
+        <div class="contact-arrow">→</div>
+      </div>
+
+      <div class="copy">
+        <span>© 2025 PARK SEOYEON</span>
+        <span>ALL RIGHTS RESERVED.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const works = {
+      "2025": [
+        ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
+        ["아마드티 북렛", "Editorial Design", "img/work2.jpg"],
+        ["초콜릿 패키지", "Package Design", "img/work3.jpg"],
+        ["알바몬 CI", "Branding Design", "img/work4.jpg"],
+        ["도서전 포스터", "Graphic Design", "img/work5.jpg"],
+        ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
+      ],
+
+      "2026": [
+        ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
+        ["아마드티 북렛", "Editorial Design", "img/work2.jpg"],
+        ["초콜릿 패키지", "Package Design", "img/work3.jpg"],
+        ["알바몬 CI", "Branding Design", "img/work4.jpg"],
+        ["도서전 포스터", "Graphic Design", "img/work5.jpg"],
+        ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
+      ]
+    };
+
+    function setYear(year) {
+      const grid = document.getElementById("workGrid");
+
+      grid.innerHTML = "";
+
+      document.querySelectorAll(".year-tabs button").forEach(function(button) {
+        button.classList.remove("active");
+      });
+
+      const activeTab = document.getElementById("tab-" + year);
+      if (activeTab) {
+        activeTab.classList.add("active");
+      }
+
+      works[year].forEach(function(item, index) {
+        const card = document.createElement("div");
+        card.className = "work-card";
+
+        card.innerHTML = `
+          <h3>${String(index + 1).padStart(2, "0")}<br>${item[0]}</h3>
+          <small>${item[1]}</small>
+
+          <div class="thumb">
+            <img src="${item[2]}" alt="${item[0]}">
+          </div>
+
+          <div class="arrow">→</div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    setYear("2026");
+  </script>
+</body>
+</html>

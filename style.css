@@ -333,38 +333,69 @@ button {
 }
 
 /* 04 CONTACT */
-.contact {
+.contact-bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 118px;
   background: #050505;
   color: #fff;
-  padding: 72px 0 48px;
+  z-index: 100;
+
+  opacity: 0;
+  transform: translateY(100%);
+  pointer-events: none;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
 
-.contact-grid {
+.contact-bar.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.contact-inner {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  grid-template-columns: 260px 1fr 90px;
   gap: 48px;
-  align-items: start;
+  align-items: center;
 }
 
-.contact h2 {
-  font-size: 44px;
+.contact-title {
+  font-size: 28px;
   line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -1px;
 }
 
-.contact h4 {
-  font-size: 13px;
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+.contact-info h4 {
+  font-size: 11px;
+  margin-bottom: 8px;
   color: #fff;
-  margin-bottom: 12px;
 }
 
-.contact p {
-  font-size: 14px;
+.contact-info p {
+  font-size: 13px;
   color: #ccc;
 }
 
 .contact-arrow {
   color: #d80018;
-  font-size: 58px;
+  font-size: 52px;
   text-align: right;
 }
 

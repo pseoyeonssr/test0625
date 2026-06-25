@@ -3,42 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Archive Portfolio</title>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <!-- 현재 섹션 표시 -->
   <aside class="side-label" id="sideLabel">ABOUT</aside>
 
+  <!-- MAIN -->
   <section class="hero" id="main">
     <div class="hero-inner">
-      <div class="logo">PARK SEOYEON<br>VISUAL DESIGNER</div>
-      <div class="menu">MENU <span class="menu-line"></span></div>
+      <div class="logo">
+        PARK SEOYEON<br />
+        VISUAL DESIGNER
+      </div>
 
       <h1 class="title">ARCHIVE</h1>
 
       <nav class="year-menu">
         <a href="#works" onclick="setYear('2025')">2025</a>
-        <a href="#works" class="active" onclick="setYear('2026')">2026 —</a>
-        <a class="locked">2027 🔒</a>
+        <a href="#works" class="active" onclick="setYear('2026')">2026</a>
+        <a class="locked">2027</a>
       </nav>
 
       <div class="scroll-text">SCROLL</div>
     </div>
 
+    <!-- 사각형 전환 효과 -->
     <div class="pixel-transition" id="pixelTransition"></div>
   </section>
 
+  <!-- ABOUT -->
   <section class="about section-observe" data-label="ABOUT" id="about">
     <div class="container about-grid">
       <div class="photo-wrap">
         <div class="photo">
-          <img src="img/profile.jpg" alt="프로필 이미지">
+          <img src="img/profile.jpg" alt="프로필 이미지" />
         </div>
       </div>
 
       <div class="about-text">
-        <h2>PARK<br>SEOYEON</h2>
+        <h2>PARK<br />SEOYEON</h2>
         <div class="red">VISUAL DESIGNER</div>
 
         <p>
@@ -49,7 +57,10 @@
         <div class="line"></div>
 
         <strong>EDUCATION</strong>
-        <p>2025 - 현재<br>시각디자인과 재학</p>
+        <p>
+          2025 - 현재<br />
+          시각디자인과 재학
+        </p>
       </div>
 
       <div class="skills">
@@ -86,149 +97,48 @@
     </div>
   </section>
 
+  <!-- WORKS -->
   <section class="works section-observe" data-label="ARCHIVE" id="works">
     <div class="container">
       <div class="year-tabs">
         <button onclick="setYear('2025')" id="tab-2025">2025</button>
         <button onclick="setYear('2026')" id="tab-2026" class="active">2026</button>
-        <button disabled>2027 🔒</button>
+        <button disabled>2027</button>
       </div>
 
       <div class="work-grid" id="workGrid"></div>
     </div>
   </section>
 
-  <script>
-    const pixelWrap = document.getElementById("pixelTransition");
+  <!-- 화면 하단 고정 CONTACT -->
+  <footer class="contact-bar" id="contactBar">
+    <div class="contact-inner">
+      <div class="contact-title">
+        LET’S WORK<br />
+        TOGETHER
+      </div>
 
-    for (let i = 0; i < 120; i++) {
-      const block = document.createElement("span");
-      block.style.left = Math.random() * 100 + "%";
-      block.style.top = Math.random() * 100 + "%";
-      block.style.width = Math.random() * 80 + 20 + "px";
-      block.style.height = Math.random() * 36 + 12 + "px";
-      block.style.transitionDelay = Math.random() * 0.7 + "s";
-      pixelWrap.appendChild(block);
-    }
-
-    window.addEventListener("scroll", () => {
-      const scrollY = window.scrollY;
-      const heroHeight = window.innerHeight;
-
-      if (scrollY > heroHeight * 0.15) {
-        pixelWrap.classList.add("active");
-      } else {
-        pixelWrap.classList.remove("active");
-      }
-    });
-
-    const sideLabel = document.getElementById("sideLabel");
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          sideLabel.textContent = entry.target.dataset.label;
-        }
-      });
-    }, {
-      threshold: 0.45
-    });
-
-    document.querySelectorAll(".section-observe").forEach(section => {
-      observer.observe(section);
-    });
-
-    const works = {
-      "2025": [
-        ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
-        ["아마드티 북렛", "Editorial Design", "img/work2.jpg"],
-        ["초콜릿 패키지", "Package Design", "img/work3.jpg"],
-        ["알바몬 CI", "Branding Design", "img/work4.jpg"],
-        ["도서전 포스터", "Graphic Design", "img/work5.jpg"],
-        ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
-      ],
-      "2026": [
-        ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
-        ["아마드티 북렛", "Editorial Design", "img/work2.jpg"],
-        ["초콜릿 패키지", "Package Design", "img/work3.jpg"],
-        ["알바몬 CI", "Branding Design", "img/work4.jpg"],
-        ["도서전 포스터", "Graphic Design", "img/work5.jpg"],
-        ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
-      ]
-    };
-
-    function setYear(year) {
-      const grid = document.getElementById("workGrid");
-      grid.innerHTML = "";
-
-      document.querySelectorAll(".year-tabs button").forEach(btn => {
-        btn.classList.remove("active");
-      });
-
-      const activeTab = document.getElementById("tab-" + year);
-      if (activeTab) activeTab.classList.add("active");
-
-      works[year].forEach((item, index) => {
-        const card = document.createElement("div");
-        card.className = "work-card";
-
-        card.innerHTML = `
-          <h3>${String(index + 1).padStart(2, "0")}<br>${item[0]}</h3>
-          <small>${item[1]}</small>
-          <div class="thumb">
-            <img src="${item[2]}" alt="${item[0]}">
-          </div>
-          <div class="arrow">→</div>
-        `;
-
-        grid.appendChild(card);
-      });
-
-  
-        const contactBar = document.getElementById("contactBar");
-
-        window.addEventListener("scroll", function () {
-            const scrollAmount = window.scrollY;
-            const showPoint = window.innerHeight * 0.8;
-
-            if (scrollAmount > showPoint) {
-            contactBar.classList.add("show");
-            } else {
-            contactBar.classList.remove("show");
-            }
-        });
-
-    }
-
-    setYear("2026");
-  </script>
-
-    <footer class="contact-bar" id="contactBar">
-        <div class="contact-inner">
-            <div class="contact-title">
-            LET’S WORK<br />
-            TOGETHER
-            </div>
-
-            <div class="contact-info">
-            <div>
-                <h4>EMAIL</h4>
-                <p>seoyeon.park@gmail.com</p>
-            </div>
-
-            <div>
-                <h4>INSTAGRAM</h4>
-                <p>@seoyeon.design</p>
-            </div>
-
-            <div>
-                <h4>PHONE</h4>
-                <p>010-1234-5678</p>
-            </div>
-            </div>
-
-            <div class="contact-arrow">→</div>
+      <div class="contact-info">
+        <div>
+          <h4>EMAIL</h4>
+          <p>seoyeon.park@gmail.com</p>
         </div>
-    </footer>
+
+        <div>
+          <h4>INSTAGRAM</h4>
+          <p>@seoyeon.design</p>
+        </div>
+
+        <div>
+          <h4>PHONE</h4>
+          <p>010-1234-5678</p>
+        </div>
+      </div>
+
+      <div class="contact-arrow">→</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

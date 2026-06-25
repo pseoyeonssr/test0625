@@ -131,35 +131,32 @@ button {
 }
 
 /* 메인 → 어바웃 사각형 전환 */
-.pixel-transition {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-
-  width: 100%;
-  height: 45vh;
-  z-index: 1;
-
-  pointer-events: none;
+.hero {
+  height: 100vh;
+  background: #f7f5f0;
+  position: relative;
   overflow: hidden;
 }
 
-.pixel-transition span {
+.hero-pieces {
   position: absolute;
-  display: block;
-
-  background: #f7f5f0;
-  opacity: 0;
-
-  transform: translateY(80px) scale(0.4);
-  transition:
-    opacity 0.45s ease,
-    transform 0.55s ease;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.pixel-transition.active span {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+.hero-piece {
+  position: absolute;
+  background: #d80018;
+  will-change: transform, opacity;
+}
+
+.hero-inner {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 /* ABOUT */

@@ -55,19 +55,53 @@ function setYear(year) {
 }
 
 /* 사각형 블록 생성 */
-const pixelTransition = document.getElementById("pixelTransition");
+gsap.registerPlugin(ScrollTrigger);
 
-for (let i = 0; i < 150; i++) {
-  const block = document.createElement("span");
+const heroPieces = document.getElementById("heroPieces");
 
-  block.style.left = Math.random() * 100 + "%";
-  block.style.top = Math.random() * 100 + "%";
-  block.style.width = Math.random() * 90 + 20 + "px";
-  block.style.height = Math.random() * 55 + 18 + "px";
-  block.style.transitionDelay = Math.random() * 0.55 + "s";
+const cols = 18;
+const rows = 10;
+const pieceWidth = 100 / cols;
+const pieceHeight = 100 / rows;
 
-  pixelTransition.appendChild(block);
+for (let y = 0; y < rows; y++) {
+  for (let x = 0; x < cols; x++) {
+    const piece = document.createElement("div");
+    piece.classList.add("hero-piece");
+
+    piece.style.left = `${x * pieceWidth}%`;
+    piece.style.top = `${y * pieceHeight}%`;
+    piece.style.width = `${pieceWidth + 0.2}%`;
+    piece.style.height = `${pieceHeight + 0.2}%`;
+
+    heroPieces.appendChild(piece);
+  }
 }
+
+gsap.to(".hero-piece", {
+  y: function () {
+    return gsap.utils.random(180, 650);
+  },
+  x: function () {
+    return gsap.utils.random(-80, 80);
+  },
+  rotation: function () {
+    return gsap.utils.random(-18, 18);
+  },
+  opacity: 0,
+  stagger: {
+    amount: 0.9,
+    from: "random"
+  },
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: 1,
+    pin: true
+  }
+});
 
 /* contact, side label 제어 */
 const contactBar = document.getElementById("contactBar");

@@ -29,37 +29,6 @@ button {
   margin: 0 auto;
 }
 
-/* 왼쪽 고정 메뉴 */
-.side-nav {
-  position: fixed;
-  left: 32px;
-  top: 0;
-  width: 120px;
-  height: 100vh;
-  border-right: 1px solid rgba(0, 0, 0, 0.18);
-  z-index: 20;
-  pointer-events: none;
-}
-
-.side-item {
-  position: absolute;
-  left: 0;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.side-item span {
-  color: #d80018;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.side-item small {
-  display: block;
-  font-size: 13px;
-  font-weight: 400;
-  margin-top: 6px;
-}
 
 .s1 {
   top: 8%;
@@ -164,61 +133,6 @@ button {
   writing-mode: vertical-rl;
   font-size: 12px;
   font-weight: 800;
-}
-
-/* 붉은 블럭 붕괴 효과 */
-.collapse-blocks {
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 120px;
-  background:
-    linear-gradient(
-      90deg,
-      #f7f5f0 0 8%,
-      transparent 8% 10%,
-      #f7f5f0 10% 18%,
-      transparent 18% 21%,
-      #f7f5f0 21% 38%,
-      transparent 38% 41%,
-      #f7f5f0 41% 52%,
-      transparent 52% 55%,
-      #f7f5f0 55% 69%,
-      transparent 69% 72%,
-      #f7f5f0 72% 100%
-    );
-
-  clip-path: polygon(
-    0 60%,
-    5% 58%,
-    5% 45%,
-    12% 45%,
-    12% 62%,
-    20% 62%,
-    20% 42%,
-    28% 42%,
-    28% 68%,
-    36% 68%,
-    36% 50%,
-    45% 50%,
-    45% 63%,
-    52% 63%,
-    52% 47%,
-    60% 47%,
-    60% 70%,
-    68% 70%,
-    68% 54%,
-    78% 54%,
-    78% 66%,
-    88% 66%,
-    88% 48%,
-    100% 48%,
-    100% 100%,
-    0 100%
-  );
-
-  animation: glitch 2.2s infinite alternate;
 }
 
 @keyframes glitch {
@@ -462,4 +376,41 @@ button {
   display: flex;
   justify-content: space-between;
   color: #bbb;
+}
+
+.side-label {
+  position: fixed;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  writing-mode: vertical-rl;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #d80018;
+  transition: 0.35s;
+}
+
+.pixel-transition {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 180px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pixel-transition span {
+  position: absolute;
+  display: block;
+  background: #f7f5f0;
+  transform: translateY(120px) scaleX(0.5);
+  opacity: 0;
+}
+
+.pixel-transition.active span {
+  transform: translateY(0) scaleX(1);
+  opacity: 1;
 }

@@ -78,7 +78,7 @@ window.addEventListener("scroll", function () {
   const heroHeight = window.innerHeight;
 
   /* 메인 화면에서는 contact 숨김 */
-  if (scrollAmount > heroHeight * 0.75) {
+  if (scrollAmount > heroHeight * 0.25) {
     contactBar.classList.add("show");
     sideLabel.classList.add("show");
   } else {

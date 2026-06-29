@@ -76,7 +76,9 @@ document.querySelectorAll("[data-year-link]").forEach((link) => {
   });
 });
 
-setYear("2026");
+window.addEventListener("DOMContentLoaded", () => {
+  setYear("2026");
+});
 
 /* ---------------------------
    HERO RED DISSOLVE

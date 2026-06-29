@@ -86,8 +86,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const heroPieces = document.getElementById("heroPieces");
 
-const cols = 60;
-const rows = 34;
+const cols = 35;
+const rows = 60;
 const pieceW = 100 / cols;
 const pieceH = 100 / rows;
 
@@ -98,8 +98,8 @@ for (let row = 0; row < rows; row++) {
 
     piece.style.left = `${col * pieceW}%`;
     piece.style.top = `${row * pieceH}%`;
-    piece.style.width = `${pieceW + 0.08}%`;
-    piece.style.height = `${pieceH + 0.08}%`;
+    piece.style.width = `${pieceW + 0.05}%`;
+    piece.style.height = `${pieceH + 0.05}%`;
 
     piece.dataset.row = row;
     piece.dataset.col = col;

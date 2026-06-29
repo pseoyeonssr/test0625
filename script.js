@@ -86,8 +86,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const heroPieces = document.getElementById("heroPieces");
 
-const cols = 24;
-const rows = 14;
+const cols = 60;
+const rows = 34;
 const pieceW = 100 / cols;
 const pieceH = 100 / rows;
 

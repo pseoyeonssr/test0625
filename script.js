@@ -14,7 +14,11 @@ const works = {
     ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
   ],
   "2026": [
-    ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
+    [  "러시아혁명 인포그래픽",
+      "Editorial Design",
+      "img/work1.jpg",
+      "러시아혁명 110주년을 주제로 한 인포그래픽 아카이브 작업입니다. 붕괴와 재건이라는 흐름을 중심으로 구성했습니다."
+    ],
     ["브랜드 아이덴티티 가이드", "Branding Design", "img/work2.jpg"],
     ["패키지 디자인 시리즈", "Package Design", "img/work3.jpg"],
     ["편집 디자인 아카이브", "Editorial Design", "img/work4.jpg"],
@@ -42,15 +46,18 @@ function setYear(year) {
     const article = document.createElement("article");
     article.className = "work-item";
 
-    article.innerHTML = `
-      <div class="work-thumb">
-        <img src="${item[2]}" alt="${item[0]} 이미지">
-      </div>
-      <div class="work-num">${String(index + 1).padStart(2, "0")}</div>
-      <h3 class="work-title">${item[0]}</h3>
-      <p class="work-type">${item[1]}</p>
-      <div class="work-arrow">→</div>
-    `;
+   article.innerHTML = `
+  <div class="work-thumb">
+    <img src="${item[2]}" alt="${item[0]} 이미지">
+  </div>
+  <div class="work-num">${String(index + 1).padStart(2, "0")}</div>
+  <h3 class="work-title">${item[0]}</h3>
+  <p class="work-type">${item[1]}</p>
+  <div class="work-arrow">→</div>
+`;
+article.querySelector(".work-thumb").addEventListener("click", () => {
+  openModal(item);
+});
 
     workList.appendChild(article);
   });
@@ -209,4 +216,53 @@ gsap.utils.toArray(".section").forEach((section) => {
       }
     }
   );
+});
+
+const modal = document.getElementById("workModal");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const modalType = document.getElementById("modalType");
+const modalDesc = document.getElementById("modalDesc");
+const modalClose = document.getElementById("modalClose");
+const modalBg = document.getElementById("modalBg");
+
+function openModal(item) {
+  modalImg.src = item[2];
+  modalTitle.textContent = item[0];
+  modalType.textContent = item[1];
+  modalDesc.textContent = item[3];
+
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  modal.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+modalClose.addEventListener("click", closeModal);
+modalBg.addEventListener("click", closeModal);
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
+});
+
+/* CUSTOM CURSOR */
+
+const customCursor = document.getElementById("customCursor");
+
+window.addEventListener("mousemove", (e) => {
+  customCursor.style.left = `${e.clientX}px`;
+  customCursor.style.top = `${e.clientY}px`;
+});
+
+document.querySelectorAll("a, button, .work-thumb").forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    customCursor.classList.add("hover");
+  });
+
+  el.addEventListener("mouseleave", () => {
+    customCursor.classList.remove("hover");
+  });
 });

@@ -6,24 +6,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 const works = {
   "2025": [
-    ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
-    ["아마드티 북렛", "Editorial Design", "img/work2.jpg"],
-    ["초콜릿 패키지", "Package Design", "img/work3.jpg"],
-    ["알바몬 CI", "Branding Design", "img/work4.jpg"],
-    ["서울국제도서전 포스터", "Graphic Design", "img/work5.jpg"],
-    ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
+  
   ],
   "2026": [
-    [  "러시아혁명 인포그래픽",
-      "Editorial Design",
-      "img/work1.jpg",
-      "러시아혁명 110주년을 주제로 한 인포그래픽 아카이브 작업입니다. 붕괴와 재건이라는 흐름을 중심으로 구성했습니다."
-    ],
-    ["브랜드 아이덴티티 가이드", "Branding Design", "img/work2.jpg"],
-    ["패키지 디자인 시리즈", "Package Design", "img/work3.jpg"],
-    ["편집 디자인 아카이브", "Editorial Design", "img/work4.jpg"],
-    ["웹 포트폴리오", "Web Design", "img/work5.jpg"],
-    ["전시 그래픽 시스템", "Graphic Design", "img/work6.jpg"]
+    ["알바몬 리브랜딩","Brand Identity Design","img/work1.jpg", "기존 알바몬의 친근한 이미지를 유지하면서도 더욱 현대적이고 직관적인 브랜드 아이덴티티를 제안한 리브랜딩 프로젝트입니다. 심벌과 로고, 컬러 시스템, 응용 그래픽을 재설계하고 브랜드 가이드라인과 다양한 어플리케이션을 함께 제작했습니다."],
+    ["커피 패키지", "Package Design", "img/work2.jpg","커피 원산지의 문화와 개성을 그래픽으로 표현한 패키지 디자인 프로젝트입니다. 에티오피아, 케냐, 콜롬비아를 주제로 각각의 특징을 흑백 라인 일러스트와 컬러 시스템으로 구성하여 통일감 있는 시리즈 패키지를 제작했습니다."],
+    ["서울국제도서전 포스터 및 굿즈", "Graphic Design / Goods Design", "img/work3.jpg","'길'과 '지식의 빛'이라는 키워드를 중심으로 서울국제도서전의 메인 포스터와 굿즈를 디자인했습니다. 타이포그래피와 추상적인 그래픽 요소를 활용하여 독서와 지식으로 향하는 여정을 시각적으로 표현했습니다."],
+    ["브레히트 시선집", "Editorial Design", "img/work4.jpg","브레히트의 시 「분서」를 중심으로 검열과 저항이라는 메시지를 시각적으로 해석한 북디자인 프로젝트입니다. 절제된 타이포그래피와 검은 마커, 스탬프 그래픽을 활용하여 시대적 분위기와 작품의 긴장감을 담아냈습니다."],
+    ["스컬판다 프로모션 웹", "Web Design", "img/work5.jpg","팝마트의 캐릭터 브랜드 스컬판다를 위한 프로모션 웹사이트입니다. 캐릭터의 세계관과 분위기를 반영한 인터랙션과 모션을 적용하여 브랜드 경험을 강화하고, 제품과 시리즈를 효과적으로 소개할 수 있는 웹 인터페이스를 설계했습니다."],
+    ["러시아혁명 110주년 기념 리플렛", "Editorial / Infographic Design", "img/work6.jpg","러시아혁명 110주년을 기념하여 제작한 인포그래픽 리플렛입니다. 복잡한 역사적 사건을 정보 구조화와 시각화 기법으로 정리하였으며, 러시아 구성주의 그래픽과 편집 디자인을 현대적으로 재해석하여 하나의 아카이브 형태로 구성했습니다."]
   ]
 };
 

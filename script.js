@@ -3,32 +3,31 @@ gsap.registerPlugin(ScrollTrigger);
 /* ---------------------------
    WORK DATA
 ---------------------------- */
+
 const works = {
   "2025": [
     ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
     ["아마드티 북렛", "Editorial Design", "img/work2.jpg"],
     ["초콜릿 패키지", "Package Design", "img/work3.jpg"],
     ["알바몬 CI", "Branding Design", "img/work4.jpg"],
-    ["도서전 포스터", "Graphic Design", "img/work5.jpg"],
+    ["서울국제도서전 포스터", "Graphic Design", "img/work5.jpg"],
     ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
   ],
-
   "2026": [
     ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
-    ["아마드티 북렛", "Editorial Design", "img/work2.jpg"],
-    ["초콜릿 패키지", "Package Design", "img/work3.jpg"],
-    ["알바몬 CI", "Branding Design", "img/work4.jpg"],
-    ["도서전 포스터", "Graphic Design", "img/work5.jpg"],
-    ["스컬판다 웹사이트", "Web Design", "img/work6.jpg"]
+    ["브랜드 아이덴티티 가이드", "Branding Design", "img/work2.jpg"],
+    ["패키지 디자인 시리즈", "Package Design", "img/work3.jpg"],
+    ["편집 디자인 아카이브", "Editorial Design", "img/work4.jpg"],
+    ["웹 포트폴리오", "Web Design", "img/work5.jpg"],
+    ["전시 그래픽 시스템", "Graphic Design", "img/work6.jpg"]
   ]
 };
 
-/* ---------------------------
-   YEAR / WORK LIST
----------------------------- */
 const workList = document.getElementById("workList");
 
 function setYear(year) {
+  if (!works[year]) return;
+
   workList.innerHTML = "";
 
   document.querySelectorAll("[data-year]").forEach((btn) => {
@@ -44,15 +43,14 @@ function setYear(year) {
     article.className = "work-item";
 
     article.innerHTML = `
-  <div class="work-thumb">
-    <img src="${item[2]}" alt="${item[0]}">
-  </div>
-
-  <div class="work-num">${String(index + 1).padStart(2, "0")}</div>
-  <h3 class="work-title">${item[0]}</h3>
-  <p class="work-type">${item[1]}</p>
-  <div class="work-arrow">→</div>
-`;
+      <div class="work-thumb">
+        <img src="${item[2]}" alt="${item[0]} 이미지">
+      </div>
+      <div class="work-num">${String(index + 1).padStart(2, "0")}</div>
+      <h3 class="work-title">${item[0]}</h3>
+      <p class="work-type">${item[1]}</p>
+      <div class="work-arrow">→</div>
+    `;
 
     workList.appendChild(article);
   });
@@ -82,8 +80,8 @@ setYear("2026");
 
 /* ---------------------------
    HERO RED DISSOLVE
-   빨간 화면이 조각나서 아래로 흐르는 효과
 ---------------------------- */
+
 const heroPieces = document.getElementById("heroPieces");
 
 const cols = 24;
@@ -101,7 +99,6 @@ for (let row = 0; row < rows; row++) {
     piece.style.width = `${pieceW + 0.08}%`;
     piece.style.height = `${pieceH + 0.08}%`;
 
-    /* 위쪽보다 아래쪽이 먼저 바스라지도록 데이터 저장 */
     piece.dataset.row = row;
     piece.dataset.col = col;
 
@@ -133,7 +130,6 @@ gsap.to(pieces, {
   }
 });
 
-/* 타이포도 같이 살짝 흩어지게 */
 gsap.to(".hero-content", {
   y: -80,
   opacity: 0,
@@ -147,16 +143,16 @@ gsap.to(".hero-content", {
 });
 
 /* ---------------------------
-   FIXED CONTACT SHOW / HIDE
+   FIXED UI
 ---------------------------- */
+
 const contactBar = document.getElementById("contactBar");
 const sectionLabel = document.getElementById("sectionLabel");
 
 function checkFixedUI() {
-  const scrollAmount = window.scrollY;
-  const showPoint = window.innerHeight * 0.25;
+  const showPoint = window.innerHeight * 0.4;
 
-  if (scrollAmount > showPoint) {
+  if (window.scrollY > showPoint) {
     contactBar.classList.add("show");
     sectionLabel.classList.add("show");
   } else {
@@ -171,6 +167,7 @@ checkFixedUI();
 /* ---------------------------
    SECTION LABEL
 ---------------------------- */
+
 const watchedSections = document.querySelectorAll(".section-watch");
 
 const observer = new IntersectionObserver(
@@ -191,17 +188,23 @@ watchedSections.forEach((section) => observer.observe(section));
 /* ---------------------------
    SECTION REVEAL MOTION
 ---------------------------- */
+
 gsap.utils.toArray(".section").forEach((section) => {
-  gsap.from(section.querySelectorAll("h2, .section-kicker, .intro-text, .info-line, .skill-block, .work-item"), {
-    y: 36,
-    opacity: 0,
-    duration: 0.65,
-    stagger: 0.08,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: section,
-      start: "top 78%",
-      once: true
+  gsap.from(
+    section.querySelectorAll(
+      "h2, .section-kicker, .intro-text, .info-line, .skill-block"
+    ),
+    {
+      y: 36,
+      opacity: 0,
+      duration: 0.65,
+      stagger: 0.08,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 78%",
+        once: true
+      }
     }
-  });
+  );
 });

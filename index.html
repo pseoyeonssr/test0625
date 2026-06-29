@@ -11,104 +11,101 @@
 
 <body>
   <!-- 현재 섹션 표시 -->
-  <aside class="side-label" id="sideLabel">ABOUT</aside>
+  <aside class="section-label" id="sectionLabel">MAIN</aside>
 
-  <!-- MAIN -->
-  <section class="hero" id="main">
-    <div class="hero-inner">
-      <div class="logo">
+  <!-- MAIN / HERO -->
+  <header class="hero" id="main">
+    <!-- 빨간 화면을 구성하는 조각들 -->
+    <div class="hero-pieces" id="heroPieces"></div>
+
+    <div class="hero-content">
+      <div class="site-name">
         PARK SEOYEON<br />
         VISUAL DESIGNER
       </div>
 
-      <h1 class="title">ARCHIVE</h1>
+      <h1 class="hero-title">
+        ARCHIVE
+      </h1>
 
-      <nav class="year-menu">
-        <a href="#works" onclick="setYear('2025')">2025</a>
-        <a href="#works" class="active" onclick="setYear('2026')">2026</a>
-        <a class="locked">2027</a>
+      <nav class="year-nav">
+        <a href="#works" data-year-link="2025">2025</a>
+        <a href="#works" data-year-link="2026" class="active">2026</a>
+        <span class="locked">2027</span>
       </nav>
 
-      <div class="scroll-text">SCROLL</div>
+      <div class="scroll-guide">SCROLL</div>
     </div>
-
-  </section>
+  </header>
 
   <!-- ABOUT -->
-  <section class="about section-observe" data-label="ABOUT" id="about">
-    <div class="container about-grid">
-      <div class="photo-wrap">
-        <div class="photo">
-          <img src="img/profile.jpg" alt="프로필 이미지" />
-        </div>
+  <section class="section about section-watch" id="about" data-label="ABOUT">
+    <div class="container about-layout">
+      <div class="profile-photo">
+        <img src="img/profile.jpg" alt="프로필 이미지" />
       </div>
 
       <div class="about-text">
-        <h2>PARK<br />SEOYEON</h2>
-        <div class="red">VISUAL DESIGNER</div>
 
-        <p>
-          사람들에게 정보를 효과적으로 전달하는 디자인을 연구하고 있습니다.
-          인포그래픽, 편집디자인, 브랜딩을 중심으로 작업하고 있습니다.
+        <h2>
+          PARK<br />
+          SEOYEON
+        </h2>
+        <p class="section-kicker">VISUAL DESIGNER</p>
+
+        <p class="intro-text">
+          정보를 구조화하고 시각적으로 전달하는 디자인을 중심으로 작업합니다.
+          편집디자인, 인포그래픽, 브랜딩, 웹 인터페이스를 통해
+          명확하고 강한 인상을 남기는 시각 언어를 실험합니다.
         </p>
 
-        <div class="line"></div>
-
-        <strong>EDUCATION</strong>
-        <p>
-          2025 - 현재<br />
-          시각디자인과 재학
-        </p>
+        <div class="info-line">
+          <span>EDUCATION</span>
+          <p>무역학과 졸업<br 
+          />시각디자인과 재학</p>
+        </div>
       </div>
 
       <div class="skills">
-        <h3>SKILLS</h3>
+        <p class="section-kicker">SKILLS</p>
 
-        <div class="skill-group">
-          <h4>GRAPHIC</h4>
-          <ul>
-            <li>Photoshop</li>
-            <li>Illustrator</li>
-            <li>InDesign</li>
-          </ul>
+        <div class="skill-block">
+          <h3>GRAPHIC</h3>
+          <p>Photoshop<br />Illustrator<br />InDesign</p>
         </div>
 
-        <div class="skill-group">
-          <h4>WEB</h4>
-          <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>Figma</li>
-          </ul>
+        <div class="skill-block">
+          <h3>WEB</h3>
+          <p>HTML<br />CSS<br />Figma</p>
         </div>
 
-        <div class="skill-group">
-          <h4>INTERESTS</h4>
-          <ul>
-            <li>Editorial Design</li>
-            <li>Infographic</li>
-            <li>Branding</li>
-            <li>Typography</li>
-          </ul>
+        <div class="skill-block">
+          <h3>INTERESTS</h3>
+          <p>Editorial Design<br />Infographic<br />Branding<br />Typography</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- WORKS -->
-  <section class="works section-observe" data-label="ARCHIVE" id="works">
+  <section class="section works section-watch" id="works" data-label="ARCHIVE">
     <div class="container">
-      <div class="year-tabs">
-        <button onclick="setYear('2025')" id="tab-2025">2025</button>
-        <button onclick="setYear('2026')" id="tab-2026" class="active">2026</button>
-        <button disabled>2027</button>
+      <div class="works-header">
+        <p class="section-kicker">WORK ARCHIVE</p>
+        <h2>SELECTED<br />WORKS</h2>
       </div>
 
-      <div class="work-grid" id="workGrid"></div>
+      <div class="year-tabs">
+        <button type="button" data-year="2025">2025</button>
+        <button type="button" data-year="2026" class="active">2026</button>
+        <button type="button" disabled>2027</button>
+      </div>
+
+      <div class="work-list" id="workList"></div>
     </div>
   </section>
 
-  <!-- 화면 하단 고정 CONTACT -->
+  <!-- 고정 CONTACT BAR -->
   <footer class="contact-bar" id="contactBar">
     <div class="contact-inner">
       <div class="contact-title">
@@ -118,18 +115,18 @@
 
       <div class="contact-info">
         <div>
-          <h4>EMAIL</h4>
-          <p>seoyeon.park@gmail.com</p>
+          <span>EMAIL</span>
+          <p>pseoyeon.ssr@gmail.com</p>
         </div>
 
         <div>
-          <h4>INSTAGRAM</h4>
-          <p>@seoyeon.design</p>
+          <span>INSTAGRAM</span>
+          <p>@pseoyeon.design</p>
         </div>
 
         <div>
-          <h4>PHONE</h4>
-          <p>010-1234-5678</p>
+          <span>PHONE</span>
+          <p>010-4941-1224</p>
         </div>
       </div>
 
@@ -137,9 +134,9 @@
     </div>
   </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
+  <!-- GSAP 먼저, 내 script.js는 마지막 -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

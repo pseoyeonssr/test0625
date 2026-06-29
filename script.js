@@ -1,4 +1,8 @@
-/* 작품 데이터 */
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---------------------------
+   WORK DATA
+---------------------------- */
 const works = {
   "2025": [
     ["러시아혁명 인포그래픽", "Editorial Design", "img/work1.jpg"],
@@ -19,123 +23,161 @@ const works = {
   ]
 };
 
-/* 연도별 작품 표시 */
+/* ---------------------------
+   YEAR / WORK LIST
+---------------------------- */
+const workList = document.getElementById("workList");
+
 function setYear(year) {
-  const grid = document.getElementById("workGrid");
+  workList.innerHTML = "";
 
-  grid.innerHTML = "";
-
-  document.querySelectorAll(".year-tabs button").forEach(function (button) {
-    button.classList.remove("active");
+  document.querySelectorAll("[data-year]").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.year === year);
   });
 
-  const activeTab = document.getElementById("tab-" + year);
+  document.querySelectorAll("[data-year-link]").forEach((link) => {
+    link.classList.toggle("active", link.dataset.yearLink === year);
+  });
 
-  if (activeTab) {
-    activeTab.classList.add("active");
-  }
+  works[year].forEach((item, index) => {
+    const article = document.createElement("article");
+    article.className = "work-item";
 
-  works[year].forEach(function (item, index) {
-    const card = document.createElement("div");
-    card.className = "work-card";
+    article.innerHTML = `
+  <div class="work-thumb">
+    <img src="${item[2]}" alt="${item[0]}">
+  </div>
 
-    card.innerHTML = `
-      <h3>${String(index + 1).padStart(2, "0")}<br>${item[0]}</h3>
-      <small>${item[1]}</small>
+  <div class="work-num">${String(index + 1).padStart(2, "0")}</div>
+  <h3 class="work-title">${item[0]}</h3>
+  <p class="work-type">${item[1]}</p>
+  <div class="work-arrow">→</div>
+`;
 
-      <div class="thumb">
-        <img src="${item[2]}" alt="${item[0]}">
-      </div>
+    workList.appendChild(article);
+  });
 
-      <div class="arrow">→</div>
-    `;
-
-    grid.appendChild(card);
+  gsap.from(".work-item", {
+    y: 24,
+    opacity: 0,
+    duration: 0.45,
+    stagger: 0.055,
+    ease: "power2.out"
   });
 }
 
-/* 사각형 블록 생성 */
-gsap.registerPlugin(ScrollTrigger);
+document.querySelectorAll("[data-year]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (!btn.disabled) setYear(btn.dataset.year);
+  });
+});
 
+document.querySelectorAll("[data-year-link]").forEach((link) => {
+  link.addEventListener("click", () => {
+    setYear(link.dataset.yearLink);
+  });
+});
+
+setYear("2026");
+
+/* ---------------------------
+   HERO RED DISSOLVE
+   빨간 화면이 조각나서 아래로 흐르는 효과
+---------------------------- */
 const heroPieces = document.getElementById("heroPieces");
 
-const cols = 18;
-const rows = 10;
-const pieceWidth = 100 / cols;
-const pieceHeight = 100 / rows;
+const cols = 24;
+const rows = 14;
+const pieceW = 100 / cols;
+const pieceH = 100 / rows;
 
-for (let y = 0; y < rows; y++) {
-  for (let x = 0; x < cols; x++) {
-    const piece = document.createElement("div");
-    piece.classList.add("hero-piece");
+for (let row = 0; row < rows; row++) {
+  for (let col = 0; col < cols; col++) {
+    const piece = document.createElement("span");
+    piece.className = "hero-piece";
 
-    piece.style.left = `${x * pieceWidth}%`;
-    piece.style.top = `${y * pieceHeight}%`;
-    piece.style.width = `${pieceWidth + 0.2}%`;
-    piece.style.height = `${pieceHeight + 0.2}%`;
+    piece.style.left = `${col * pieceW}%`;
+    piece.style.top = `${row * pieceH}%`;
+    piece.style.width = `${pieceW + 0.08}%`;
+    piece.style.height = `${pieceH + 0.08}%`;
+
+    /* 위쪽보다 아래쪽이 먼저 바스라지도록 데이터 저장 */
+    piece.dataset.row = row;
+    piece.dataset.col = col;
 
     heroPieces.appendChild(piece);
   }
 }
 
-gsap.to(".hero-piece", {
-  y: function () {
-    return gsap.utils.random(180, 650);
+const pieces = gsap.utils.toArray(".hero-piece");
+
+gsap.to(pieces, {
+  y: (i, el) => {
+    const row = Number(el.dataset.row);
+    return 160 + row * 30 + gsap.utils.random(0, 260);
   },
-  x: function () {
-    return gsap.utils.random(-80, 80);
-  },
-  rotation: function () {
-    return gsap.utils.random(-18, 18);
-  },
+  x: () => gsap.utils.random(-70, 70),
+  rotation: () => gsap.utils.random(-12, 12),
   opacity: 0,
+  ease: "none",
   stagger: {
     amount: 0.9,
-    from: "random"
+    from: "end"
   },
-  ease: "power2.out",
   scrollTrigger: {
     trigger: ".hero",
     start: "top top",
-    end: "bottom top",
-    scrub: 1,
+    end: "+=120%",
+    scrub: 0.7,
     pin: true
   }
 });
 
-/* contact, side label 제어 */
-const contactBar = document.getElementById("contactBar");
-const sideLabel = document.getElementById("sideLabel");
-
-window.addEventListener("scroll", function () {
-  const scrollAmount = window.scrollY;
-  const heroHeight = window.innerHeight;
-
-  /* 메인 화면에서는 contact 숨김 */
-  if (scrollAmount > heroHeight * 0.25) {
-    contactBar.classList.add("show");
-    sideLabel.classList.add("show");
-  } else {
-    contactBar.classList.remove("show");
-    sideLabel.classList.remove("show");
-  }
-
-  /* 메인에서 내려갈 때 사각형 전환 */
-  if (scrollAmount > heroHeight * 0.12 && scrollAmount < heroHeight * 0.95) {
-    pixelTransition.classList.add("active");
-  } else {
-    pixelTransition.classList.remove("active");
+/* 타이포도 같이 살짝 흩어지게 */
+gsap.to(".hero-content", {
+  y: -80,
+  opacity: 0,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=80%",
+    scrub: 0.7
   }
 });
 
-/* 현재 섹션 이름 변경 */
-const sections = document.querySelectorAll(".section-observe");
+/* ---------------------------
+   FIXED CONTACT SHOW / HIDE
+---------------------------- */
+const contactBar = document.getElementById("contactBar");
+const sectionLabel = document.getElementById("sectionLabel");
+
+function checkFixedUI() {
+  const scrollAmount = window.scrollY;
+  const showPoint = window.innerHeight * 0.25;
+
+  if (scrollAmount > showPoint) {
+    contactBar.classList.add("show");
+    sectionLabel.classList.add("show");
+  } else {
+    contactBar.classList.remove("show");
+    sectionLabel.classList.remove("show");
+  }
+}
+
+window.addEventListener("scroll", checkFixedUI);
+checkFixedUI();
+
+/* ---------------------------
+   SECTION LABEL
+---------------------------- */
+const watchedSections = document.querySelectorAll(".section-watch");
 
 const observer = new IntersectionObserver(
-  function (entries) {
-    entries.forEach(function (entry) {
+  (entries) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        sideLabel.textContent = entry.target.dataset.label;
+        sectionLabel.textContent = entry.target.dataset.label;
       }
     });
   },
@@ -144,9 +186,22 @@ const observer = new IntersectionObserver(
   }
 );
 
-sections.forEach(function (section) {
-  observer.observe(section);
-});
+watchedSections.forEach((section) => observer.observe(section));
 
-/* 처음에는 2026 작품 표시 */
-setYear("2026");
+/* ---------------------------
+   SECTION REVEAL MOTION
+---------------------------- */
+gsap.utils.toArray(".section").forEach((section) => {
+  gsap.from(section.querySelectorAll("h2, .section-kicker, .intro-text, .info-line, .skill-block, .work-item"), {
+    y: 36,
+    opacity: 0,
+    duration: 0.65,
+    stagger: 0.08,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: section,
+      start: "top 78%",
+      once: true
+    }
+  });
+});
